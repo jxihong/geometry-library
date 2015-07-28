@@ -191,19 +191,4 @@ std::ostream & operator<<(std::ostream &os, const Matrix<T> &m) {
   return os;
 }
 
-
-
-/**
- * Defines Matrix subclass with fixed size 3x3
- */
-template <typename T> class Matrix3 : public Matrix<T> {
-
-public:
-  Matrix3(): Matrix<T>(3, 3) {}
-};
-
-typedef Matrix3<float> Matrix3F;
-typedef Matrix3<double> Matrix3D;
-typedef Matrix3<int> Matrix3I;
-
 #endif // _MATRIX_H

@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-#include "Matrix.hh"
+#include "Matrix3.hh"
 
 /*
  * Defines a 3-D Vector
@@ -64,10 +64,11 @@ public:
 
   inline Vector3<T> & operator*=(const Matrix3<T> &m) {
     for (int i = 0; i < 3; i++) {
-      _elems[i] = 0;
+      T newElem = (T)0;
       for (int j = 0; j < 3; j++) {
-	_elems[i] += m.getelem(i,j) * _elems[j];
+	newElem += m.getelem(i,j) * _elems[j];
       }
+      _elems[i] = newElem;
     }
     return *this;
   }
