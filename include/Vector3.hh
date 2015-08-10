@@ -1,9 +1,10 @@
 #ifndef _VECTOR3_H
 #define _VECTOR3_H
 
+#include <vector>
 #include <cmath>
 
-#include "Matrix3.hh"
+#include "Matrix.hh"
 
 /*
  * Defines a 3-D Vector
@@ -62,14 +63,20 @@ public:
     return *this;
   }
 
-  inline Vector3<T> & operator*=(const Matrix3<T> &m) {
+  inline Vector3<T> & operator*=(const Matrix<T> &m) {
+    assert(m.getrows() == 3);
+    assert(m.getcols() == 3);
+
+    Vector3<T> temp;
     for (int i = 0; i < 3; i++) {
       T newElem = (T)0;
       for (int j = 0; j < 3; j++) {
 	newElem += m.getelem(i,j) * _elems[j];
       }
-      _elems[i] = newElem;
+      temp[i] = newElem;
     }
+    *this = temp;
+    
     return *this;
   }
  
@@ -120,13 +127,13 @@ inline const Vector3<T> operator*(T factor, const Vector3<T> &b) {
 
 // Vector * Matrix(3x3)
 template<typename T>
-inline const Vector3<T> operator*(const Vector3<T> &a, const Matrix3<T> &m) {
+inline const Vector3<T> operator*(const Vector3<T> &a, const Matrix<T> &m) {
   return Vector3<T>(a) *= m;
 }
 
 // Matrix(3x3) * Vector
 template<typename T>
-inline const Vector3<T> operator*(const Matrix3<T> &m, const Vector3<T> &a) {
+inline const Vector3<T> operator*(const Matrix<T> &m, const Vector3<T> &a) {
   return Vector3<T>(a) *= m;
 }
 

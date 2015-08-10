@@ -6,7 +6,7 @@ using namespace std;
 using namespace geometry;
 
 int main() {
-  Matrix3F my_m = Matrix3F::identity();
+  MatrixSquareF my_m = MatrixSquareF::identity(3);
   cout << "Matrix: " << my_m << endl;
   
   Vector3F my_v(1, 2, 3);

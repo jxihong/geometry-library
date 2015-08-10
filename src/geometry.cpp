@@ -1,4 +1,5 @@
 #include "../include/Vector3.hh"
+#include "../include/MatrixSquare.hh"
 
 namespace geometry {
 
@@ -29,4 +30,30 @@ namespace geometry {
     }
     return std::abs(dist);
   }
+
+  /*
+   * Finds the area of a polygon with point-array defined by
+   * vector p
+   */
+  template <typename T>
+  T polygonArea(std::vector<Vector3<T> > &p) {
+    T area = 0;
+    
+    // Triangulate polygon into p[0], p[i], and p[i+1]
+    for (int i = 1; i + 1 < p.size(); i++) {
+      Vector3<T> p1 = p[i] - p[0];
+      Vector3<T> p2 = p[i+1] - p[0];
+      
+      T triangleArea = cross(p1, p2).magnitude_sq();
+      if (triangleArea >= 0) {
+	area +=  (T)sqrt(triangleArea)/2;
+      }
+      else {
+	area += (T)-1 * (T)sqrt(triangleArea)/2;
+      }
+    }
+
+    return std::abs(area);
+  }
+
 }

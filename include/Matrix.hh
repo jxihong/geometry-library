@@ -141,7 +141,7 @@ public:
   inline bool operator!=(const Matrix<T> &m) const {
     return !(*this == m);
   }
-
+    
 };
 
 template<typename T>
@@ -174,6 +174,19 @@ inline const Matrix<T> operator/(const Matrix<T> &m, T factor) {
   return Matrix<T>(m) /= factor;
 }
 
+template<typename T>
+inline const Matrix<T> transpose(const Matrix<T> &m) {
+  Matrix<T> trans(m.getcols(), m.getrows());
+
+  for (int i = 0; i < m.getrows(); i++) {
+    for (int j = 0; j < m.getcols(); j++) {
+      trans.setelem(j, i, m.getelem(i,j));
+    }
+  }
+
+  return trans;
+}
+  
 template<typename T>
 std::ostream & operator<<(std::ostream &os, const Matrix<T> &m) {
   os << "[";
