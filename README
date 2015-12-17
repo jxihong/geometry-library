@@ -11,7 +11,7 @@ project was inspired by a topcoder tutorial on geometry.
 
 --------------------------------
 
-The main program can be compiled by typing 'make' in the bash. There is a sample test file that can be edited.
+The main program can be compiled by typing 'make' in the bash. There is a short sample test file that can be edited.
 
 To run the program, just type:
 

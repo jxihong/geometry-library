@@ -1,5 +1,5 @@
-#ifndef _MATRIX_H
-#define _MATRIX_H
+#ifndef _MATRIX_HH
+#define _MATRIX_HH
 
 #include <iostream>
 #include <cassert>
@@ -14,7 +14,7 @@ private:
   int _numCols;
 
   T *_contents;
-
+  
   inline void cleanup() { delete[] _contents; }
 
   inline void copy(const Matrix<T> &m) {
@@ -32,7 +32,7 @@ public:
   Matrix(): _numRows(0), _numCols(0) {
     _contents = new T[0];
   }
-
+  
   Matrix(int rows, int cols): _numRows(rows), _numCols(cols) {
     int size = rows * cols;
     
@@ -41,28 +41,28 @@ public:
       _contents[i] = (T)0;
     }
   }
-
+  
   Matrix(const Matrix<T> &m) { copy(m); }
-
+  
   ~Matrix() { cleanup(); }
-
+  
   inline int getrows() const {return _numRows;}
   inline int getcols() const {return _numCols;}
   
   inline T getelem(int a, int b) const {
     int index = a * _numCols + b;
     assert (index < _numRows * _numCols);
-
+    
     return _contents[index];
   }
-
+  
   inline void setelem(int a, int b, T n) {
     int index = a * _numCols + b;
     assert (index < _numRows * _numCols);
-
+    
     _contents[index] = n;
   }
-
+  
   inline Matrix<T> & operator=(const Matrix<T> &m) {
     if (this != &m){
       cleanup();
@@ -177,13 +177,13 @@ inline const Matrix<T> operator/(const Matrix<T> &m, T factor) {
 template<typename T>
 inline const Matrix<T> transpose(const Matrix<T> &m) {
   Matrix<T> trans(m.getcols(), m.getrows());
-
+  
   for (int i = 0; i < m.getrows(); i++) {
     for (int j = 0; j < m.getcols(); j++) {
       trans.setelem(j, i, m.getelem(i,j));
     }
   }
-
+  
   return trans;
 }
   
@@ -204,4 +204,4 @@ std::ostream & operator<<(std::ostream &os, const Matrix<T> &m) {
   return os;
 }
 
-#endif // _MATRIX_H
+#endif // _MATRIX_HH
